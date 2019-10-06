@@ -6,7 +6,7 @@ struct Node{
     struct Node *next;
     struct Node *prev;
 };
-
+//DOUBLY LINKED LIST
 void print(struct Node* head){
     if(head==NULL){
         printf("Linked List Empty");
