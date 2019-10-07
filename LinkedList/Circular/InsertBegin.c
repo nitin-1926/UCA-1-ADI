@@ -6,31 +6,36 @@ struct Node{
     struct Node *next;
 };
 
-void print(struct Node* head){
-    if(head==NULL){
-        printf("Linked List Empty");
-    }
-    struct Node* ptr = head;
-    while(ptr){
-        printf("%d -> ",ptr->data);
-        ptr = ptr->next;
-    }
+void insertBegin(struct Node** head, int data)
+{
+  struct Node* node = (struct Node*) malloc(sizeof(struct Node));
+  struct Node* t = *head;
+  node->data  = data;
+  node->next = *head;
+  if (*head != NULL)
+  {
+    while(t->next != *head)
+      t = t->next;
+    t->next = node;
+  }
+  else
+    node->next = node;
+  *head = node;
 }
 
-struct Node* makeNode(int num){
-    struct Node* node = (struct Node *)malloc(sizeof(struct Node));
-    node->data = num;
-    node->next = node;
-    return node;
-}
-struct Node* insertBegin(struct Node** head,struct Node* node){
-    if(*head==NULL){
-        *head = node;
-        return *head;
+void print(struct Node *first)
+{
+  struct Node *temp = first;
+  if (first != NULL)
+  {
+    do
+    {
+      printf("%d ", temp->data);
+      temp = temp->next;
     }
-    node->next = *head;
-    *head = node;
-    return *head;
+    while (temp != first);
+  }
+  printf("\n");
 }
 
 int main(){
@@ -41,8 +46,7 @@ int main(){
     for(int i=0;i<n;i++){
         int num;
         scanf("%d",&num);
-        struct Node* temp = makeNode(num);
-        insertBegin(&head,temp);
+        insertBegin(&head,num);
     }
     print(head);
     return 0;
