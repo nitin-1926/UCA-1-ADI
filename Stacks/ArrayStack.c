@@ -1,33 +1,25 @@
 #include<stdio.h>
-
 #define SIZE 20
-
 int Stack[SIZE], top=-1;
 
-int isFull()
-{
+int isFull(){
   return top==(SIZE-1);
 }
 
-int isEmpty()
-{
+int isEmpty(){
   return top==-1;
 }
 
-int push(int item)
-{
-  if (isFull())
-  {
+int push(int item){
+  if (isFull()){
     return -1;
   }
   Stack[++top] = item;
 }
 
-int pop()
-{
+int pop(){
   int temp;
-  if (isEmpty())
-  {
+  if (isEmpty()){
     return -1;
   }
   temp=Stack[top--];
@@ -35,8 +27,7 @@ int pop()
   return temp;
 }
 
-int main()
-{
+int main(){
   int temp;
   push(56);
   push(544);
