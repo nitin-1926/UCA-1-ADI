@@ -4,25 +4,17 @@
 #include<functional>
 using namespace std;
 
-void printMedians(double arr[], int n)
-{
+void printMedian(double arr[], int n){
 	priority_queue<double> maxHeap;
-
 	priority_queue<double,vector<double>,greater<double> > minHeap;
 
 	double med = arr[0];
 	maxHeap.push(arr[0]);
-
 	cout << med << endl;
-
-	for (int i=1; i < n; i++)
-	{
+	for (int i=1; i < n; i++){
 		double x = arr[i];
-
-		if (maxHeap.size() > minHeap.size())
-		{
-			if (x < med)
-			{
+		if (maxHeap.size() > minHeap.size()){
+			if (x < med){
 				minHeap.push(maxHeap.top());
 				maxHeap.pop();
 				maxHeap.push(x);
@@ -32,25 +24,18 @@ void printMedians(double arr[], int n)
 
 			med = (maxHeap.top() + minHeap.top())/2.0;
 		}
-
-		else if (maxHeap.size()==minHeap.size())
-		{
-			if (x < med)
-			{
+		else if (maxHeap.size()==minHeap.size()){
+			if (x < med){
 				maxHeap.push(x);
 				med = (double)maxHeap.top();
 			}
-			else
-			{
+			else{
 				minHeap.push(x);
 				med = (double)minHeap.top();
 			}
 		}
-
-		else
-		{
-			if (x > med)
-			{
+		else{
+			if (x > med){
 				maxHeap.push(minHeap.top());
 				minHeap.pop();
 				minHeap.push(x);
@@ -60,19 +45,18 @@ void printMedians(double arr[], int n)
 
 			med = (maxHeap.top() + minHeap.top())/2.0;
 		}
-
 		cout << med << endl;
 	}
 }
 
-int main()
-{
-    int n;
-    cin>>n;
-    double ar[n];
-    for(int i=0;i<n;i++){
+int main(){
+    int size;
+    cout<<"Enter the size of the stream"<<endl;
+    cin>>size;
+    double ar[size];
+    for(int i=0;i<size;i++){
         cin>>ar[i];
-	    printMedians(ar, n);
+        printMedian(ar, size);
     }
 	return 0;
 }
