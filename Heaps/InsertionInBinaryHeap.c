@@ -25,7 +25,7 @@ void printArray(int arr[], int n){
 } 
 int main(){ 
     int arr[MAX] = { 10, 5, 3, 2, 4 }; 
-    int n = 5;  
+    int n = sizeof(arr) / sizeof(arr[0]);  
     int key = 15;  
     insertNode(arr, n, key);  
     printArray(arr, n); 
