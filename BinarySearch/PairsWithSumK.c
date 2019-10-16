@@ -51,15 +51,15 @@ void mergeSort(int arr[], int left, int right){
     } 
 }
 
-int countpair(int ar[],int s,int e,int sum){
+int countpair(int arr[],int s,int e,int sum){
     int c=0;
     while(s<e){
-        int total=ar[s]+ar[e];
+        int total=arr[s]+arr[e];
         if(total==sum){
-           if(ar[s]==ar[s+1]){
+           if(arr[s]==arr[s+1]){
                int temp=0;
                while(temp<e){
-                   if(ar[temp]+ar[e]==sum)
+                   if(arr[temp]+arr[e]==sum)
                     c++;
                    temp++;
                }

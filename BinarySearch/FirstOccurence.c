@@ -50,15 +50,15 @@ void mergeSort(int arr[], int left, int right){
         merge(arr, left, m, right); 
     } 
 }
-int first(int ar[],int s,int e,int k){
+int first(int arr[],int s,int e,int k){
     int pos=-1;
     while(s<=e){
         int m=(s+e)/2;
-        if(ar[m]==k){
+        if(arr[m]==k){
             pos=m;
             e=m-1;
         }
-        else if(ar[m]<k){
+        else if(arr[m]<k){
             s=m+1;
         }
         else
