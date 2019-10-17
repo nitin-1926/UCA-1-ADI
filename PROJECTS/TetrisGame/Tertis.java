@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.IOException;
 
-class Tertis {
+class Tetris {
 
     ShapeTemplate m[];
     ShapeTemplate k;
@@ -13,7 +13,7 @@ class Tertis {
 
     boolean status;
 
-    Tertis() {
+    Tetris() {
         m = new ShapeTemplate[] { new Line(), new T(), new Sq(), new Z(), new L() };
 
         k = m[(int) (Math.random() * 5)];
@@ -26,31 +26,20 @@ class Tertis {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        // System.out.println("Kya mai chall ra hu");
 
-        Tertis t = new Tertis();
+        Tetris t = new Tetris();
         t.boardFunctions();
         Scanner sc = new Scanner(System.in);
 
-        // new Timer().scheduleAtFixedRate(new TimerTask() {
-        // @Override
-        // public void run() {
-        // t.k.moveDown();
-        // t.boardFunctions();
-        // }
-        // }, 0, 500);
-        // RunBackground rb = new RunBackground();
-        // rb.send(t);
-        // rb.start();
         char choice = sc.next().charAt(0);
 
-        while (choice != 'e') {
+        while (choice != 'q') {
 
             switch (choice) {
-            case 's':
+            case 'e':
                 t.redoStack = new Stack<String>();
                 t.k.rotateLeft();
-                t.stack.push("s");
+                t.stack.push("e");
                 t.boardFunctions();
                 break;
 
@@ -79,10 +68,10 @@ class Tertis {
                 t.boardFunctions();
                 break;
 
-            case 'x':
+            case 's':
                 t.redoStack = new Stack<String>();
                 t.k.moveDown();
-                t.stack.push("x");
+                t.stack.push("s");
                 t.boardFunctions();
                 break;
 
@@ -90,10 +79,8 @@ class Tertis {
 
                 if (t.stack.empty()) {
                     t.boardFunctions();
-                    // System.out.println("hi");
                 } else {
-                    // System.out.println("hi Undo Working");
-                    if (t.stack.peek() == "s") {
+                    if (t.stack.peek() == "e") {
                         t.redoStack.push(t.stack.pop());
                         t.k.rotateRight();
                     } else if (t.stack.peek() == "w") {
@@ -115,10 +102,8 @@ class Tertis {
             case 'r':
                 if (t.redoStack.empty()) {
                     t.boardFunctions();
-                    // System.out.println("hi");
                 } else {
-                    // System.out.println("hi Redo Working");
-                    if (t.redoStack.peek() == "s") {
+                    if (t.redoStack.peek() == "e") {
                         t.stack.push(t.redoStack.pop());
                         t.k.rotateLeft();
                     } else if (t.redoStack.peek() == "w") {
@@ -162,31 +147,6 @@ class Tertis {
     }
 
 }
-
-// class RunBackground extends Thread {
-
-// Tertis t;
-
-// public void run() {
-// new Timer().scheduleAtFixedRate(new TimerTask() {
-// @Override
-// public void run() {
-// try {
-// System.out.println("i am runned at all");
-// t.k.moveDown();
-// t.boardFunctions();
-// } catch (Exception e) {
-// System.out.println("i am not able to run");
-// }
-
-// }
-// }, 0, 500);
-// }
-
-// void send(Tertis th) {
-// t = th;
-// }
-// }
 
 class Board {
 
@@ -250,7 +210,6 @@ class Board {
 
     public boolean insertShape(Shape s) {
         int[][] co = s.getCordinates();
-        // int max = s.getMax();
         boolean flag = false;
         for (int i = 0; i < 30; i++) {
             for (int j = 0; j < 30; j++) {
@@ -259,14 +218,9 @@ class Board {
             }
         }
         for (int i = 0; i < 4; i++) {
-            // System.out.println(max + 4 + " " + (co[i][0] + 4) + " " + (co[i][1] + 4));
 
             if ((board[(co[i][0] + 5)][co[i][1] + 4] == '$' || board[(co[i][0] + 5)][co[i][1] + 4] == '*')) {
-                /// System.out.println("ye lo paji " + (max + 4) + " " + (co[i][0] + 4) + " " +
-                /// (co[i][1] + 4));
                 flag = true;
-
-                // System.out.println("hii i am called at all");
             }
             board[(co[i][0] + 4)][co[i][1] + 4] = '#';
         }
@@ -299,7 +253,6 @@ class Board {
 
 class Shape {
     int[][] shape = new int[4][2];
-    // int min, max, verMax;
 
     Shape(int[][] ar) {
         for (int i = 0; i < 4; i++) {
@@ -307,55 +260,17 @@ class Shape {
                 shape[i][j] = ar[i][j];
             }
         }
-        // calcMinMax();
     }
 
     int[][] getCordinates() {
         return shape;
     }
 
-    // int getMax() {
-    // return verMax;
-    // }
-
-    // void calcMinMax() {
-    // min = 40;
-    // max = -40;
-    // verMax = -40;
-    // for (int i = 0; i < 4; i++) {
-    // if (max < shape[i][1]) {
-    // max = shape[i][1];
-    // }
-    // }
-    // for (int i = 0; i < 4; i++) {
-    // if (min > shape[i][1]) {
-    // min = shape[i][1];
-    // }
-    // }
-    // for (int i = 0; i < 4; i++) {
-    // // System.out.println(shape[i][0] + 4);
-
-    // if (verMax < shape[i][0]) {
-    // verMax = shape[i][0];
-    // }
-    // }
-    // System.out.println("");
-    // }
-
     boolean moveRight(Board b) {
 
         for (int i = 0; i < 4; i++) {
             if (b.finalBoard[shape[i][0] + 4][shape[i][1] + 5] == '$'
                     || b.finalBoard[shape[i][0] + 4][shape[i][1] + 5] == '*') {
-
-                // System.out.println("printing Final Board start");
-                // for (int m = 0; m < 30; m++) {
-                // for (int j = 0; j < 30; j++) {
-                // System.out.print(b.finalBoard[m][j]);
-                // }
-                // System.out.println("");
-                // }
-                // System.out.println("printing Final Board end");
                 System.out.println(b.finalBoard[shape[i][0] + 4][shape[i][1] + 5] == '*');
                 return false;
             }
@@ -366,12 +281,10 @@ class Shape {
                 shape[i][j] += 1;
             }
         }
-        // max++;
         return true;
     }
 
     boolean moveLeft(Board b) {
-        // calcMinMax();
 
         for (int i = 0; i < 4; i++) {
             if (b.finalBoard[shape[i][0] + 4][shape[i][1] + 3] == '$'
@@ -385,24 +298,16 @@ class Shape {
                 shape[i][j] -= 1;
             }
         }
-        // min--;
         return true;
     }
 
     void moveDown() {
-
-        // calcMinMax();
-        // if ((verMax + 5) > 28) {
-        // return false;
-        // }
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 1; j++) {
                 shape[i][j] += 1;
             }
         }
-        // verMax++;
-        // return true;
     }
 
     void moveUp() {
@@ -517,12 +422,7 @@ class Z extends ShapeTemplate {
     Z() {
         current = 0;
         main = new Shape(new int[][] { { 0, 0 }, { -1, -1 }, { 0, -1 }, { 1, 0 } });
-        // Shape left = new Shape(new int[][] { { 0, 0 }, { 0, 1 }, { 1, 0 }, { 1, -1 }
-        // });
         right = new Shape(new int[][] { { 0, 0 }, { -1, 0 }, { -1, 1 }, { 0, -1 } });
-        // Shape invert = new Shape(new int[][]{
-        // {0,0},{}
-        // });
         states = new Shape[] { main, right };
     }
 
