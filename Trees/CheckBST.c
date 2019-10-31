@@ -7,14 +7,7 @@ struct node
 	int data; 
 	struct node* left; 
 	struct node* right; 
-}; 
-
-int isBSTUtil(struct node* node, int min, int max); 
-
-int isBST(struct node* node) 
-{ 
-return(isBSTUtil(node, INT_MIN, INT_MAX)); 
-} 
+};
 
 int isBSTUtil(struct node* node, int min, int max) 
 { 
@@ -24,6 +17,11 @@ if (node->data < min || node->data > max)
 	return 0; 
 return
 	isBSTUtil(node->left, min, node->data-1) &&	isBSTUtil(node->right, node->data+1, max); 
+}
+
+int isBST(struct node* node) 
+{ 
+return(isBSTUtil(node, INT_MIN, INT_MAX)); 
 } 
 
 struct node* newNode(int data) 

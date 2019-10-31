@@ -2,7 +2,7 @@
 #include<stdlib.h>
 
 #define SIZE 20
-int tree[20] = {0};
+int tree[SIZE] = {0};
 
 void printTree(int a[]){
   int i =0;
@@ -33,11 +33,11 @@ void setInTree(int a[], int val, int i){
 
 int main(){
 
-  setInTree(tree,1,0);
+  setInTree(tree,5,0);
   setInTree(tree,2,0);
   setInTree(tree,3,0);
-  // setInTree(tree,2,0);
-  // setInTree(tree,6,0);
+  setInTree(tree,2,0);
+  setInTree(tree,6,0);
 
   printTree(tree);
 
