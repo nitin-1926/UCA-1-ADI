@@ -4,36 +4,6 @@
 #define SIZE 20
 int tree[20] = {0};
 
-// void setRight(int *,int, int);
-
-// void setLeft(int a[],int val,int i){
-//   if(a[i]!=0){
-//     a[i]=val;
-//   }
-//   else{
-//     if(val<a[i]){
-//       setLeft(a,val,i*2+1);
-//     }
-//     else{
-//      setRight(a,val,i*2+2);
-//     }
-//   }
-// }
-// void setRight(int a[],int val,int i){
-//   if(a[i]!=0){
-//     a[i]=val;
-//   }
-//   else{
-//     if(val<a[i]){
-//       setLeft(a,val,i*2+1);
-//     }
-//     else{
-//      setRight(a,val,i*2+2);
-//     }
-//   }
-  
-// }
-
 void printTree(int a[]){
   int i =0;
   while(i<SIZE){
