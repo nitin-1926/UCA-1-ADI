@@ -9,19 +9,19 @@ struct node
 	struct node* right; 
 };
 
-int isBSTUtil(struct node* node, int min, int max) 
+int LoL(struct node* node, int min, int max) 
 { 
 if (node==NULL) 
 	return 1; 
 if (node->data < min || node->data > max) 
 	return 0; 
 return
-	isBSTUtil(node->left, min, node->data-1) &&	isBSTUtil(node->right, node->data+1, max); 
+	LoL(node->left, min, node->data-1) &&	LoL(node->right, node->data+1, max); 
 }
 
 int isBST(struct node* node) 
 { 
-return(isBSTUtil(node, INT_MIN, INT_MAX)); 
+return(LoL(node, INT_MIN, INT_MAX)); 
 } 
 
 struct node* newNode(int data) 
