@@ -3,7 +3,7 @@
 
 struct node 
 { 
-	int key; 
+	int data; 
 	struct node *left, *right; 
 }; 
 
@@ -11,7 +11,7 @@ struct node
 struct node *newNode(int item) 
 { 
 	struct node *temp = (struct node *)malloc(sizeof(struct node)); 
-	temp->key = item; 
+	temp->data = item; 
 	temp->left = temp->right = NULL; 
 	return temp; 
 } 
@@ -22,22 +22,22 @@ void inorder(struct node *root)
 	if (root != NULL) 
 	{ 
 		inorder(root->left); 
-		printf("%d ", root->key); 
+		printf("%d ", root->data); 
 		inorder(root->right); 
 	} 
 } 
 
 
-struct node* insert(struct node* node, int key) 
+struct node* insert(struct node* node, int data) 
 { 
 
-	if (node == NULL) return newNode(key); 
+	if (node == NULL) return newNode(data); 
 
 
-	if (key < node->key) 
-		node->left = insert(node->left, key); 
+	if (data < node->data) 
+		node->left = insert(node->left, data); 
 	else
-		node->right = insert(node->right, key); 
+		node->right = insert(node->right, data); 
 
 
 	return node; 
@@ -59,26 +59,15 @@ struct node * minValueNode(struct node* node)
 
 
 
-struct node* deleteNode(struct node* root, int key) 
+struct node* deleteNode(struct node* root, int data) 
 { 
-	// base case 
-	if (root == NULL) return root; 
-
-
-
-	if (key < root->key) 
-		root->left = deleteNode(root->left, key); 
-
-
-
-	else if (key > root->key) 
-		root->right = deleteNode(root->right, key); 
-
-
-
+	if (root == NULL) return root;
+	if (data < root->data) 
+		root->left = deleteNode(root->left, data); 
+	else if (data > root->data) 
+		root->right = deleteNode(root->right, data); 
 	else
-	{ 
-
+	{
 		if (root->left == NULL) 
 		{ 
 			struct node *temp = root->right; 
@@ -90,17 +79,10 @@ struct node* deleteNode(struct node* root, int key)
 			struct node *temp = root->left; 
 			free(root); 
 			return temp; 
-		} 
-
-
-
+		}
 		struct node* temp = minValueNode(root->right); 
-
-
-		root->key = temp->key; 
-
-
-		root->right = deleteNode(root->right, temp->key); 
+		root->data = temp->data; 
+		root->right = deleteNode(root->right, temp->data); 
 	} 
 	return root; 
 } 
