@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+int findPaths(int n, int m){
+    if(n==0 || m==0){
+        return 1;
+    }
+    else{
+        return findPaths(n-1,m)+findPaths(n,m-1);
+    }
+}
+int main() {
+	int t;
+	cin>>t;
+	while(t--){
+	    int n,m;
+	    cin>>n>>m;
+	    
+	    int result = findPaths(n,m);
+	    cout<<result<<endl;
+	}
+	return 0;
+}
