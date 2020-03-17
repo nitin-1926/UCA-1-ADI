@@ -1,0 +1,57 @@
+/*
+A school is conducting a debate competition in which participation is in teams. Stefan is the manager of the event. So he has to allot students to different teams. There are 400 students with roll numbers  from  1 to 400. Stefan thinks that he is smart so he used a logic to divide students in teams using their roll numbers. He has challenged you to find out the logic behind it. One team can have a maximum 3 members. Stefan has divided students using their roll numbers :
+ROLL NO. OF STUDENT                 TEAM NO.
+1                                                    1
+2                                                    1
+..............                                        ............                                                        
+79                                                   39
+80                                                   40
+ 
+
+Input: The first line of the input contains an integer T denoting the number of test cases. The description of each testcase follows. Each test case contains a single line with a single  integer X  ( roll number of the student ) .
+
+
+Output:  For each test case output a new line with a single integer which is the team number  .
+
+
+Constraints:  1 < = T < = 400
+                    1 < = X < = 1000
+                     
+Example:    
+Input : 
+5
+4
+89
+90
+897
+435
+
+Output :
+2
+44
+45
+448
+217
+*/
+#include <iostream>
+using namespace std;
+
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--){
+	    int n;
+	    cin>>n;
+	    if(n%2==0){
+	        cout<<n/2<<endl;
+	    }
+	    else if(n==1){
+	        cout<<n<<endl;
+	    }
+	    else{
+	        cout<<(n-1)/2<<endl;
+	    }
+	}
+	return 0;
+}
